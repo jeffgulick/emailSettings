@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Preferences</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card-custom {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .form-check-label i {
+            margin-right: 8px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .select-all-label {
+            color: #6c757d; /* Bootstrap's text-secondary color */
+        }
+        .bold-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card card-custom shadow-lg">
+            <div class="card-header bg-primary text-white card-header-custom">
+                <h2 class="mb-0 text-center">Email Preferences</h2>
+            </div>
+            <div class="card-body">
+                <form action="https://www.w3schools.com/action_page.php" method="post">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="criticalAlerts" name="criticalAlerts" onclick="toggleBold(this)">
+                        <label class="form-check-label" for="criticalAlerts">
+                            <i class="fas fa-exclamation-circle text-danger"></i> Critical alerts and notifications about your tax return
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="specialOffers" name="specialOffers" onclick="toggleBold(this)">
+                        <label class="form-check-label" for="specialOffers">
+                            <i class="fas fa-tags text-success"></i> Information about special offers for tax services
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="irsChanges" name="irsChanges" onclick="toggleBold(this)">
+                        <label class="form-check-label" for="irsChanges">
+                            <i class="fas fa-bell text-warning"></i> Receive notifications of IRS changes and deadlines
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="taxNewsletter" name="taxNewsletter" onclick="toggleBold(this)">
+                        <label class="form-check-label" for="taxNewsletter">
+                            <i class="fas fa-newspaper text-info"></i> Learn from monthly tax newsletter with tax news and tips
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="selectAll" onclick="toggleCheckboxes(this)">
+                        <label class="form-check-label font-weight-bold select-all-label" for="selectAll">
+                            <i class="fas fa-check-square text-primary"></i> Select / Deselect All
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-custom btn-block mt-3">
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        Save Preferences
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleCheckboxes(selectAllCheckbox) {
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            checkboxes.forEach(checkbox => {
+                if (checkbox !== selectAllCheckbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                    toggleBold(checkbox);
+                }
+            });
+        }
+
+        function toggleBold(checkbox) {
+            const label = document.querySelector(`label[for="${checkbox.id}"]`);
+            if (checkbox.checked) {
+                label.classList.add('bold-label');
+            } else {
+                label.classList.remove('bold-label');
+            }
+        }
+
+        document.querySelector('form').addEventListener('submit', function() {
+            const button = this.querySelector('button[type="submit"]');
+            const spinner = button.querySelector('.spinner-border');
+            spinner.classList.remove('d-none');
+            button.disabled = true;
+        });
+    </script>
+</body>
+</html>
